@@ -1,1 +1,5 @@
 pytest
+argparse
+urllib2
+json
+time

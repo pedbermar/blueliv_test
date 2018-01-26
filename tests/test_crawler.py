@@ -16,7 +16,12 @@ def test_all_ok():
 # Go to reddit python subrredit and get the firsrt n pages
 def test_get_n_pages():
     results = r.get_subreddit(n)
+
+    # Will fail if we dont get any results (Reddit Too Much Requests)
     assert results
+    
+    # It will fail if the subreddit has len than n pages
+    assert len(results) > 100*n
 
 # For every submission gather: Submission title, external url, discussion url,
 # submitter,punctuation, creation date and number of comments
