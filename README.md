@@ -1,5 +1,5 @@
 # Blueliv test 
-This project is a test on how to build a database-persistent python's subreddit crawler that exposes an API in order to show somo statistics of the information we have gathered before.
+This project is a test on how to build a database-persistent python's subreddit crawler that exposes an API in order to show some statistics for the information we have gathered before.
 
 # Install
 Clone the repo, move inside and
@@ -9,7 +9,7 @@ virtualenv .venv
 pip install -r requeriments
 ```
 
-# Tests
+# Test
 ```sh
 pytest tests
 ```
