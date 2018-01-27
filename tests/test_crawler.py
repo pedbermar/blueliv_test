@@ -45,3 +45,17 @@ def test_feed_parser():
         assert type(r.get('num_comm')) == int
         
 # Persist the results in a database
+def test_database():
+    data = {
+        "num_comm": 1, 
+        "author": "pedbermar", 
+        "created": 1515615418.0, 
+        "url": "https://github.com/pedbermar/blueliv_test", 
+        "title": "Pedro Berrocal githubprofile", 
+        "link": "https://github.com/pedbermar/", 
+        "punctuation": 1024
+    }
+    
+    r = Crawler()
+    assert r.update_db(data)
+        

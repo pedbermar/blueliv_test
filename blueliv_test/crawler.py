@@ -2,11 +2,14 @@ import argparse
 import urllib2
 import json
 import time
+import pymongo
 
 class Crawler:
     def __init__(self):
         self.version = 'v0.1'
         self.subr = 'https://www.reddit.com/r/python.json?limit=100&count=100&after='
+        client = pymongo.MongoClient()
+        self.db = client.blueliv_test
 
     def get_subreddit(self, n):
         results = []
@@ -44,6 +47,19 @@ class Crawler:
             results.append(result)
         return results
 
+    def update_db(self, r):
+        try:
+            result = self.db.reddit.find_one({"title": r['title']})
+            if result == None:
+                self.db.breddit.insert(r)
+            else:
+                self.db.reddit.update({"title": r['title']}, r)
+            print 'Database updated'
+            return True
+        
+        except:
+            return False
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Blueliv python subreddit parser')
@@ -52,6 +68,6 @@ if __name__ == "__main__":
     r = Crawler()
     results = r.get_subreddit(args.numpages)
     if results:
-        print results[0]['subreddit']
-        # for r in results:
+        for r in results:
+            update_db(r)
         #     print json.dumps(r, indent=2)
