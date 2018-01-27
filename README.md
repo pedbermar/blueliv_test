@@ -10,6 +10,7 @@ argparse, to parse args from the command line crawler use
 urllib2, to request reddit 
 json, for information serialization
 pymongo, the database adapter
+falcon, REST api framework
 
 # Install
 Clone the repo, move inside and
