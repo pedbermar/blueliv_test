@@ -36,5 +36,6 @@ if __name__ == "__main__":
     r = Crawler()
     results = r.get_subreddit(args.numpages)
     if results:
-        for r in results:
-            print json.dumps(r, indent=2)
+        print results[0]['subreddit']
+        # for r in results:
+        #     print json.dumps(r, indent=2)
