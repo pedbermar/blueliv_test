@@ -29,6 +29,22 @@ class Crawler:
         else:
             return False
 
+    def feed_parser(self, feed):
+        results = []
+        for f in feed:
+            result = {
+                'title': f['title'],
+                'durl': f['permalink'],
+                'eurl': f['url'],
+                'author': f['author'],
+                'num_comm': int(f['num_comments']),
+                'created': f['created_utc'],
+                'score': int(f['score'])
+            }
+            results.append(result)
+        return results
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Blueliv python subreddit parser')
     parser.add_argument('-n', '--numpages', type=int, required=True, help='an integer for the accumulator')

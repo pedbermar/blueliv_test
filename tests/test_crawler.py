@@ -31,16 +31,17 @@ def test_get_n_pages():
 # submitter,punctuation, creation date and number of comments
 def test_feed_parser():
     r = Crawler()
-    feed = r.get_subreddit(n)
-    results = r.parse_feed(feed)
+    feed = r.get_subreddit(2)
+    assert feed
+    results = r.feed_parser(feed)
     assert results
     for r in results:
-        assert r.get('title')
-        assert r.get('eurl')
-        assert r.get('durl')
-        assert r.get('author')
-        assert r.get('score')
-        assert r.get('created')
-        assert r.get('num_comm')
+        assert type(r.get('title')) == unicode
+        assert type(r.get('eurl')) == unicode 
+        assert type(r.get('durl')) == unicode
+        assert type(r.get('author')) == unicode
+        assert type(r.get('score')) == int
+        assert type(r.get('created')) == float
+        assert type(r.get('num_comm')) == int
         
 # Persist the results in a database
