@@ -8,6 +8,16 @@ class Crawler:
     def __init__(self):
         self.version = 'v0.1'
         self.subr = 'https://www.reddit.com/r/python.json?limit=100&count=100&after='
+        self.headers = {
+            'Host': 'www.reddit.com',
+            'User-Agent': '/r/python example',
+            'Accept': '*/*',
+            'Accept-Language': 'en-US',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Connection': 'keep-alive',
+            'Save-Data': 'on',
+        }
+ 
         client = pymongo.MongoClient()
         self.db = client.blueliv_test
 
@@ -16,7 +26,9 @@ class Crawler:
         nextpage = ''
         for i in range(n):
             try:
-                file = urllib2.urlopen(self.subr + nextpage)
+                req = urllib2.Request(self.subr, None, self.headers)
+                file = urllib2.urlopen(req)
+                # file = urllib2.urlopen(self.subr + nextpage)
             except:
                 return False
 	    text = file.read()
@@ -51,23 +63,27 @@ class Crawler:
         try:
             result = self.db.reddit.find_one({"title": r['title']})
             if result == None:
-                self.db.breddit.insert(r)
+                self.db.reddit.insert(r)
             else:
                 self.db.reddit.update({"title": r['title']}, r)
-            print 'Database updated'
             return True
-        
         except:
             return False
 
+    def update(self, n):
+        results = self.get_subreddit(n)
+        dic = self.feed_parser(results)
+        if dic:
+            for result in dic:
+                self.update_db(result)
 
+            return True
+        else:
+            return False
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Blueliv python subreddit parser')
     parser.add_argument('-n', '--numpages', type=int, required=True, help='an integer for the accumulator')
     args = parser.parse_args()
     r = Crawler()
-    results = r.get_subreddit(args.numpages)
-    if results:
-        for r in results:
-            update_db(r)
+    r = update(args.numpages)
         #     print json.dumps(r, indent=2)

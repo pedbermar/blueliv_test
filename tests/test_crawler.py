@@ -51,9 +51,9 @@ def test_database():
         "author": "pedbermar", 
         "created": 1515615418.0, 
         "url": "https://github.com/pedbermar/blueliv_test", 
-        "title": "Pedro Berrocal githubprofile", 
+        "title": "Pedro Berrocal github profile", 
         "link": "https://github.com/pedbermar/", 
-        "punctuation": 1024
+        "score": 1024
     }
     
     r = Crawler()

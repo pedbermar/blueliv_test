@@ -1,9 +1,9 @@
 # Blueliv test 
 This project is a test on how to build a database-persistent python's subreddit crawler that exposes an API in order to show some statistics for the information we have gathered before.
 
-# Assunmptions, disign decsions
+# Assumptions, disign decisions
+- Ubuntu 16.4, python 2.7, virtualenv
 - A Mongodb database running on localhost at default port
-- A Reddit website request not returnig 'Too many requests'
 
 # Dependencies
 argparse, to parse args from the command line crawler use 
