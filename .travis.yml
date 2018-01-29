@@ -4,6 +4,7 @@ services: mongodb
 python:
   - 2.7
 test:
-  - pytest tests
+
 script:
   - python blueliv_test.py -n 5
+  - pytest tests
