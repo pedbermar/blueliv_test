@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/pedbermar/blueliv_test.svg?branch=master)](https://travis-ci.org/pedbermar/blueliv_test)
-
-# Blueliv test 
+# Blueliv test [![Build Status](https://travis-ci.org/pedbermar/blueliv_test.svg?branch=master)](https://travis-ci.org/pedbermar/blueliv_test)
 This project is a test on how to build a database-persistent python's subreddit crawler that exposes an API in order to show some statistics for the information we have gathered before.
 
 # Assumptions, disign decisions
@@ -62,7 +60,7 @@ http://localhost:8001/top10comm
 http://localhost:8001/top5authors
 
 ## Update databasde  
-http://localhost:8001/update/ num_of_page_to_crawl
+http://localhost:8001/update/2 num_of_page_to_crawl
 
 ## All posts of an author
-http://localhost:8001/posts/ some_author
+http://localhost:8001/posts/pedbermar some_author
