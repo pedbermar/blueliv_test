@@ -3,6 +3,9 @@ language: python
 python:
   - 2.7
 before_install:
-  - pip install -r requeriments.txt
-script:
+  - pip install -U pip
+  - python setup.py install
+test:
   - pytest tests
+script:
+  - python blueliv_test.py -n 5
