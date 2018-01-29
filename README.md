@@ -44,7 +44,7 @@ To run the API:
 pip install gunicorn
 gunicorn -b localhost:8001 blueliv_test.api
 ```
-#The API end points
+# API end points
 ## All rules / any
 http://localhost:8001/
 
