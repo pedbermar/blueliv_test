@@ -8,21 +8,21 @@ This project is a test on how to build a database-persistent python's subreddit 
 - A Mongodb database running on localhost at default port
 - The information is read, stored and serve y JSON serialization format
 - Falcon is the framework used to serve the REST API, becouse it is smaller,
-  faster and more REST oriented than others framworks
+  faster and more REST oriented than others frameworks
   
 # Dependencies
-argparse, to parse args from the command line crawler use 
-urllib2, to request reddit 
-json, for information serialization
-pymongo, the database adapter
-falcon, REST api framework
+- argparse, to parse args from the command line crawler usege 
+- requests, to request reddit 
+- json, for information serialization
+- pymongo, the database adapter
+- falcon, REST api framework
 
 # Install
 Clone the repo, move inside and
 ```sh
 virtualenv .venv
 . .venv/bin/activate
-pip install -r requeriments
+pip install -r requirements.txt
 ```
 
 # Test
@@ -30,9 +30,9 @@ pip install -r requeriments
 pytest tests
 ```
 
-# Crawler Usage
+# Usage
 ```sh
-python blueliv_test/crawler.py 
+./blueliv_test.py 
 usage: crawler.py [-h] -n NUMPAGES
 crawler.py: error: argument -n/--numpages is required
 ```
@@ -40,14 +40,16 @@ Call it with -n option and a number of pages to crawl
 ```sh
 python blueliv_test/crawler.py -n 3
 ```
+
 # API usage
 To run the API:
 ```sh
 pip install gunicorn
 gunicorn -b localhost:8001 blueliv_test.api
 ```
+
 # API end points
-## All rules / any
+## hello json
 http://localhost:8001/
 
 ## Top 10 posts by score
@@ -60,7 +62,7 @@ http://localhost:8001/top10comm
 http://localhost:8001/top5authors
 
 ## Update databasde  
-http://localhost:8001/update/(number of pages to crawl)
+http://localhost:8001/update/ num_of_page_to_crawl
 
 ## All posts of an author
-http://localhost:8001/posts/(author name)
+http://localhost:8001/posts/ some_author
