@@ -3,6 +3,7 @@ import urllib2
 import json
 import time
 import pymongo
+import requests
 
 class Crawler:
     def __init__(self):
@@ -26,15 +27,19 @@ class Crawler:
         nextpage = ''
         for i in range(n):
             try:
-                req = urllib2.Request(self.subr, None, self.headers)
-                file = urllib2.urlopen(req)
+                # req = urllib2.Request(self.subr, None, self.headers)
+                # file = urllib2.urlopen(req)
+                data = requests.get(self.subr, headers=self.headers)
                 # file = urllib2.urlopen(self.subr + nextpage)
             except:
                 return False
-	    text = file.read()
-	    page = json.loads(text)['data']
-	    nextpage = page['after']
-	    children = page['children']
+	    # text = file.read()
+	    # page = json.loads(text)['data']
+
+            page = json.loads(data.text)
+            # print page
+	    nextpage = page['data']['after']
+	    children = page['data']['children']
             for c in children:
                 data = c['data']
                 results.append(data)
@@ -86,5 +91,5 @@ if __name__ == "__main__":
     parser.add_argument('-n', '--numpages', type=int, required=True, help='an integer for the accumulator')
     args = parser.parse_args()
     r = Crawler()
-    r = update(args.numpages)
+    r.update(args.numpages)
         #     print json.dumps(r, indent=2)

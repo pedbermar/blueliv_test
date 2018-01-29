@@ -1,7 +1,5 @@
+requests
 pytest
 argparse
-urlib2
-json
-time
 pymongo
 falcon
