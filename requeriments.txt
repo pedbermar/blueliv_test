@@ -1,6 +1,6 @@
 pytest
 argparse
-urllib2
+urlib2
 json
 time
 pymongo
