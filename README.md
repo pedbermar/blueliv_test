@@ -5,8 +5,12 @@ This project is a test on how to build a database-persistent python's subreddit 
 - Ubuntu 16.4, python 2.7, virtualenv
 - A Mongodb database running on localhost at default port
 - The information is read, stored and serve y JSON serialization format
-- Falcon is the framework used to serve the REST API, becouse it is smaller,
-  faster and more REST oriented than others frameworks
+- Falcon is the framework used for to serve the REST API, becouse it is
+  smaller,faster and more REST oriented than others frameworks
+- I don't use concurrency becouse I can't find, before fetch the information,
+  a way to know all urls to crawl, due to the pagination design of reddit.
+- I divide the project in two main classes, Crawler and API, the main abstract
+  object of the project
   
 # Dependencies
 - argparse, to parse args from the command line crawler usege 
