@@ -54,7 +54,8 @@ class Crawler:
                 'author': f['author'],
                 'num_comm': int(f['num_comments']),
                 'created': f['created_utc'],
-                'score': int(f['score'])
+                'score': int(f['score']),
+                'is_self': f['is_self']
             }
             results.append(result)
         return results

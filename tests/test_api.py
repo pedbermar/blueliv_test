@@ -16,8 +16,6 @@ def client():
 
 def test_api(client):
     response = client.simulate_get('/')
-    # result_doc = response.content
-    # assert json.dumps(result_doc) == 'Blueliv python subreddit API'
     assert response.status == falcon.HTTP_OK
 
 # Top 10 submissions by points
@@ -28,6 +26,7 @@ def test_top10score():
     prev_score = results[0]['score']
     for r in results[1:-1]:
         assert r['score'] <= prev_score
+    assert response.status == falcon.HTTP_OK
 
 # Top 10 discussed submissions
 def test_top10comm():
@@ -37,6 +36,7 @@ def test_top10comm():
     prev_numcomm = results[0]['num_comm']
     for r in results[1:-1]:
         assert r['num_comm'] <= prev_numcomm
+    assert response.status == falcon.HTTP_OK
 
 # Create a way to update the information of the current archived
 def test_updatedb():
@@ -47,7 +47,8 @@ def test_updatedb():
         'author': 'Pedro Berrocal',
         'num_comm': 0,
         'created': 10101010.00,
-        'score': 0
+        'score': 0,
+        'is_self': 'false'
     }
 
     testmod = {
@@ -57,7 +58,8 @@ def test_updatedb():
         'author': 'pedbermar',
         'num_comm': 0,
         'created': 10101010.00,
-        'score': 0
+        'score': 0,
+        'is_self': 'false'
     }
 
     c = pymongo.MongoClient()
@@ -67,12 +69,20 @@ def test_updatedb():
     result = db.reddit.find_one({"durl": test['durl']})
     assert result['author'] == 'pedbermar'
 
-    response = client().simulate_get('/update')
+    response = client().simulate_get('/update/3')
     results = json.dumps(response.content)
-    # assert len(results) == 10
 
     assert results
+    assert response.status == falcon.HTTP_OK
+
+    
 # Create a way to retrieve top submitters
+def test_top_authors():
+    response = client().simulate_get('/posts/aphoenix')
+    results = json.dumps(response.content)
+    assert results
+    assert response.status == falcon.HTTP_OK
+
 # Add a way to query all posts by a user
 # Add a way to query all posts a user commented
 # Use of a Continuous Integration system (Hint: TravisCI)

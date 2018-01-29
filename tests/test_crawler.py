@@ -43,6 +43,7 @@ def test_feed_parser():
         assert type(r.get('score')) == int
         assert type(r.get('created')) == float
         assert type(r.get('num_comm')) == int
+        assert type(r.get('is_self')) == bool
         
 # Persist the results in a database
 def test_database():
